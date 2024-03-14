@@ -1,4 +1,123 @@
-蘭蘭商店
-中華物産
-住所
-電話
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>蘭蘭商店</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+        .goods_image {
+            width: 230px;
+            height: 230px;
+        }
+        .qrcode_image {
+            width: 600px;
+            height: 600px;
+        }
+        .modal {
+			display: none;
+			position: fixed;
+			z-index: 9999;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-image {
+			display: block;
+			width: 100%;
+			margin: auto;
+			margin-top: 50%;
+        }
+    </style>
+</head>
+<body>
+	<H1 align="center" style="font-size:5rem;color:red;">蘭 蘭 商 店</H1>
+	<H2 align="center">中　国　物　産</H2>
+	<div class="container">
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/1.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/2.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/3.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/4.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/5.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/6.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/7.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/8.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/9.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/10.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/11.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/12.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/13.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/14.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/15.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/16.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/17.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/18.jpg"/></div>
+		</div>
+		<div class="row py-1">
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/19.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/20.jpg"/></div>
+			<div class="col-4"><img class="goods_image" alt="" data-src="./images/21.jpg"/></div>
+		</div>
+	</div>
+	<div id="modal" class="modal" onclick="hideModal()">
+		<img id="modal-image" class="modal-image"/>
+	</div>
+    <div class="footer">
+		<div class="row">
+			<div class="gy-3" align="center" style="font-size:2.5rem">住所：〒211-0004</div>
+			<div class="gy-3" align="center" style="font-size:2.5rem">神奈川県川崎市中原区新丸子東1-773-7</div>
+			<div class="gy-3" align="center" style="font-size:2.5rem">微信：daixin19820928</div>
+			<div class="gy-3" align="center"><img class="qrcode_image" alt="" src="./images/wechat.jpg" onclick="showModal(this)"/></div>
+			<div class="gy-3" align="center" style="font-size:2.5rem">LINE：daixin928</div>
+			<div class="gy-3" align="center"><img class="qrcode_image" alt="" src="./images/line.jpg" onclick="showModal(this)"/></div>
+			<div class="gy-3" align="center" style="font-size:2rem">郵送、配達について、お気楽問い合わせしてください。</div>
+		</div>
+    </div>
+</body>
+<script>
+    $(function () {
+        // 第一次需要先加载一次
+        lazyLoad();
+
+        $(window).scroll(lazyLoad);
+
+        function isInSight(el) {
+            const bound = el.getBoundingClientRect();
+            const clientHeight = $(window).height(); // 可视区高度
+            return bound.top <= clientHeight + 100; // 这里有个+100是为了提前加载。
+        }
+        function lazyLoad() {
+            $.each($('img'), (index,item)=>{
+                if(isInSight(item)) {
+                    $(item).attr('src', $(item).attr('data-src'));
+                }
+            });
+        }
+    });
+    
+    function showModal(image) {
+		var modal = document.getElementById("modal");
+		var modalImage = document.getElementById("modal-image");
+		modal.style.display = "block";
+		modalImage.src = image.src;
+    }
+    
+    function hideModal() {
+		var modal = document.getElementById("modal");
+		modal.style.display = "none";
+    }
+</script>
+</html>
